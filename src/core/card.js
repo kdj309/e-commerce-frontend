@@ -4,7 +4,7 @@ import { addItemtoCartandsaveitTolocalStorage } from './helper/Cart_helper'
 import ImageHelper from './helper/ImageHelper'
 
 
-export default function Card({ product, addtocart = true, removefromcart = false, isCartimage = false, removeItemhandler }) {
+export default function Card({ showcount = false, count, product, addtocart = true, removefromcart = false, isCartimage = false, removeItemhandler }) {
     let location = useHistory()
     return (
         <div className="card text-white bg-dark border border-info text-center">
@@ -14,6 +14,7 @@ export default function Card({ product, addtocart = true, removefromcart = false
                 <p className="lead bg-success font-weight-normal text-wrap">
                     {product.description}
                 </p>
+                {showcount && <p className='small-text text-white'>Quantity: {count}</p>}
                 <p className="btn btn-success rounded  btn-sm px-4">{product.price} Rs</p>
                 <div className="row">
                     <div className="col-12">

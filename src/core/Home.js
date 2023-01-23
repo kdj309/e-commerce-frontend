@@ -24,7 +24,7 @@ export default function Home() {
     <Base title="Welcome to coders t-shirt adda" description='All of our t-shirts dedicated to amazing coders'>
       <div className="container d-flex justify-content-evenly flex-wrap align-items-center p-2 gap-2">
         {
-          products.map((product) => {
+          products?.map((product) => {
             return <Card key={product._id} product={product} />
           })
         }
