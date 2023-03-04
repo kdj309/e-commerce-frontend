@@ -1,0 +1,5 @@
+.slick-slider-img {
+  /* width: 50v !important; */
+  height: 280px !important;
+  object-fit: contain !important;
+}

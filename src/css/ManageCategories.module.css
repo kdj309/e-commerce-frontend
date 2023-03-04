@@ -1,0 +1,76 @@
+.categoriesbtn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.categoriesbtn > button,
+a {
+  width: max-content;
+}
+.categoriesDashboard {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+}
+.categoriestable {
+  flex: 0.7;
+  padding: 1.5em;
+}
+.categorieschart {
+  flex: 0.3;
+}
+.paddingcls {
+  padding: 1.5rem !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+@media screen and (min-width: 1024px) {
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) {
+  .categoriesbtn {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+  }
+  .categoriesDashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  .categoriestable {
+    flex: unset;
+    padding: 0.5em;
+  }
+  .categorieschart {
+    flex: unset;
+  }
+  .paddingcls {
+    padding: 0.5rem !important;
+  }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+}
+
+/* For iPhone 4 Portrait or Landscape View */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 5 Portrait or Landscape View */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 6 and 6 plus Portrait or Landscape View */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) {
+}

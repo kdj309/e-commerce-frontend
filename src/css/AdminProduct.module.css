@@ -1,0 +1,63 @@
+.productimage {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.availablestock {
+  padding: 0.5em;
+}
+.imagewrapper {
+  display: block;
+}
+@media screen and (min-width: 1024px) {
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) {
+  td {
+    font-size: 12px;
+    padding: 0.25em !important;
+  }
+  td > div {
+    font-size: 12px;
+  }
+  td h6 {
+    font-size: 10px;
+  }
+  .productimage {
+    display: none;
+  }
+  .availablestock {
+    padding: 0.15em;
+  }
+  .imagewrapper {
+    display: none;
+  }
+  th {
+    font-size: 10px;
+  }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+}
+
+/* For iPhone 4 Portrait or Landscape View */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 5 Portrait or Landscape View */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 6 and 6 plus Portrait or Landscape View */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) {
+}

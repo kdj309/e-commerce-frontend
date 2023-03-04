@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Alert({ alerttype, msg }) {
+ function Alert({ alerttype, msg }) {
     return (
         <div className={`alert alert-${alerttype} alert-dismissible fade show`} role='alert'>
             {msg}
@@ -8,3 +8,4 @@ export default function Alert({ alerttype, msg }) {
         </div>
     )
 }
+export default React.memo(Alert)

@@ -9,7 +9,8 @@ import Alert from '../user/Alert';
 
 
 export default function UpdateCategory({ match }) {
-    const { id, authtoken } = isSignin();
+    const authtoken=localStorage.getItem("token");
+    const { id } = isSignin();
 
     const [values, setvalues] = useState({
         categoryName: "",
@@ -21,8 +22,10 @@ export default function UpdateCategory({ match }) {
     const Onchange = (e) => {
         setvalues({ ...values, [e.target.name]: e.target.value })
     }
-    const preload = (catgoryid) => {
-        getCategory(catgoryid).then((data) => {
+    
+    useEffect(() => {
+        const preload = () => {
+        getCategory(match.params.categoryid).then((data) => {
             if (data.errors || data.errormsg) {
                 console.log(data.errormsg);
             } else {
@@ -33,8 +36,7 @@ export default function UpdateCategory({ match }) {
             }
         })
     }
-    useEffect(() => {
-        preload(match.params.categoryid)
+        preload()
     }, [])
 
     const onClickhandler = () => {

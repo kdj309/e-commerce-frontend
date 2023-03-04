@@ -1,34 +1,42 @@
-import React from 'react'
-import Nav from './Nav'
+import React from "react";
+import Nav from "./Nav";
+import Slidercarosuel from "./Slidercarosuel";
+import styles from "../css/Base.module.css";
 
 export default function Base({
   title = "My Title",
-  description = "My desription",
-  className = "bg-dark text-white p-4",
-  children }) {
-  document.body.style = 'background: #343a40;';
+  description = "Be exclusive, Be Devine, Be yourself",
+  className = styles.defaultstyle,
+  showcarosuel = true,
+  children,
+}) {
+  document.body.style = "background: #343a40;";
 
   return (
     <div>
       <Nav />
+      {showcarosuel && <Slidercarosuel />}
       <div className="container-fluid">
-        <div className="jumbotron bg-dark text-white text-center my-3 p-3">
+        <div className={`jumbotron bg-light text-dark ${styles.titlediv}`}>
           <h2 className="display-4">{title}</h2>
           <p className="lead">{description}</p>
         </div>
         <div className={className}>{children}</div>
       </div>
-      <footer className="footer bg-dark mt-auto py-3">
-        <div className="container-fluid bg-success text-white text-center py-3">
-          <h4>If you got any questions, feel free to reach out!</h4>
-          <button className="btn btn-warning btn-lg">Contact Us</button>
+      <footer className={`footer ${styles["bg-main"]} mt-auto py-3`}>
+        <div className="container-fluid text-white text-center py-3">
+          <h4 className={styles["text-main"]}>
+            E commerce clone Using MERN Stack
+          </h4>
+          <button className={`btn btn-danger btn-lg`}>Made with Love ❤</button>
         </div>
+        <hr />
         <div className="container">
           <span className="text-muted">
-            An Amazing <span className="text-white">MERN</span> Bootcamp
+            An Amazing <span className="text-white">Myntra</span> clone
           </span>
         </div>
       </footer>
     </div>
-  )
+  );
 }

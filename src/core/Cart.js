@@ -1,52 +1,109 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
-import PaymentUIForB from '../payment/paymentUIForB'
-import Base from './Base'
-import Card from './card'
-import { emptyCart, removeItemfromCart } from './helper/Cart_helper'
-import StripePayment from '../payment/StripePayment'
-
+import React, { useState, useEffect, useMemo } from "react";
+import Base from "./Base";
+import {
+  emptyCart,
+  incrementQuantity,
+  removeItemfromCart,
+  totalAmount,
+} from "./helper/Cart_helper";
+import StripePayment from "../payment/StripePayment";
+import Cartcard from "./Cartcard";
+import { AiTwotoneDelete } from "react-icons/ai";
+import styles from "../css/CartMain.module.css";
+//
 
 export default function Cart() {
-    let location = useHistory()
+  const [products, setproducts] = useState([]);
+  const [totalAmountrs, settotalAmount] = useState(totalAmount(products));
+  const productsfromlocalstorage = useMemo(() => {
+    if (localStorage.getItem("cart") != null) {
+      return JSON.parse(localStorage.getItem("cart"));
+    } else {
+      return [];
+    }
+  }, [localStorage.getItem("cart")]);
 
-    const [products, setproducts] = useState([])
-    const productsfromlocalstorage = useMemo(
-        () => {
-            if (localStorage.getItem('cart') != null) {
-                return JSON.parse(localStorage.getItem('cart'))
-            } else {
-                return []
-            }
-        },
-        [],
-    )
-    useEffect(() => {
-        setproducts(productsfromlocalstorage)
-    }, [productsfromlocalstorage])
-    function removeProductfromCart(productid) {
-        setproducts(removeItemfromCart(productid))
-    }
-    function isCartEmpty() {
-        setproducts(emptyCart())
-    }
-    return (
-        <Base title="Welcome to your cart" description='All of our t-shirts dedicated to amazing coders'>
-            <div className=" container row text-center">
-                <div className="col-md-6 d-flex justify-content-evenly flex-wrap align-items-center p-2 gap-2 flex-column">
-                    {
-                        products?.length == 0 ? <h3 className='text-white'>You are really gone miss some cool t-shirts in your wardrobe <span className='badge bg-success mr-2'>buy some t-shirt man 😎!</span></h3> : (
-                            products?.map((product) => {
-                                return <Card showcount={true} count={product.count} removeItemhandler={removeProductfromCart} isCartimage={true} key={product._id} product={product} addtocart={false} removefromcart={true} />
-                            })
-                        )
-                    }
-                </div>
-                <div className="col-md-6">
-                    {/* <PaymentUIForB products={products} reload={isCartEmpty} /> */}
-                    {products.length > 0 && <StripePayment products={products} reload={isCartEmpty} />}
-                </div>
+  useEffect(() => {
+    setproducts(productsfromlocalstorage);
+    settotalAmount(() => {
+      return totalAmount(productsfromlocalstorage);
+    });
+  }, [productsfromlocalstorage]);
+  function removeProductfromCart(productid) {
+    setproducts(removeItemfromCart(productid));
+  }
+  function CartEmpty() {
+    setproducts(emptyCart());
+  }
+  function increaseQty(productid) {
+    setproducts(incrementQuantity(productid));
+  }
+  return (
+    <Base
+      title="Welcome to your cart"
+      description="Fashions fade. Style is eternal."
+      className={`container ${styles.basediv}`}
+    >
+      <div className={`container ${styles.MainCartContainer}`}>
+        <div
+          className={`col-md-8 p-2 d-flex flex-column ${styles.cartitemswrapper}`}
+        >
+          {products?.length === 0 ? (
+            <h3 className="text-white theme-color text-center">
+              You are really gone miss some cool clothes in your wardrobe{" "}
+              <span className="badge bg-success mr-2">
+                buy some clothes man 😎!
+              </span>
+            </h3>
+          ) : (
+            products?.map((product) => {
+              return (
+                <Cartcard
+                  showcount={true}
+                  count={product.count}
+                  removeItemhandler={removeProductfromCart}
+                  isCartimage={true}
+                  key={product._id}
+                  product={product}
+                  addtocart={false}
+                  removefromcart={true}
+                  increaseQty={increaseQty}
+                />
+              );
+            })
+          )}
+          {products.length > 0 && (
+            <button
+              className={`btn btn-danger align-self-end my-2 ${styles.cartclearbtn}`}
+              onClick={() => CartEmpty()}
+            >
+              <AiTwotoneDelete></AiTwotoneDelete>
+            </button>
+          )}
+        </div>
+        <div className="col-md-4 p-2">
+          <div className={`${styles.paymentDivcontainer}`}>
+            <p className="text-secondary">
+              PRICE DETAILS {products.length} Item
+            </p>
+            <div className="d-flex justify-content-between my-2 align-items-center">
+              <p>Total MRP</p>
+              <p>₹ {totalAmountrs}</p>
             </div>
-        </Base>
-    )
+            {products.length > 0 && (
+              <StripePayment
+                products={products}
+                reload={CartEmpty}
+                className="btn-lg btn-block btn-danger"
+                style={{ width: "100%" }}
+                size={products.map((item) => item.size)}
+              >
+                PLACE ORDER
+              </StripePayment>
+            )}
+          </div>
+        </div>
+      </div>
+    </Base>
+  );
 }

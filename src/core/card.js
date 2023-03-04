@@ -1,49 +1,45 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { addItemtoCartandsaveitTolocalStorage } from './helper/Cart_helper'
-import ImageHelper from './helper/ImageHelper'
+import React from "react";
+import { Link } from "react-router-dom";
+import api from "../backend/Api";
+import styles from "../css/card.module.css";
 
+export default function Card({ showcount = false, count, product }) {
+  return (
+    <Link to={`/product/${product._id}`} style={{ textDecoration: "none" }}>
+      <div
+        className={`text-dark bg-light text-left card my-2 ${styles["cardcontainer"]}`}
+      >
+        <div className={`${styles["card-body"]}`}>
+          <img
+            src={`${api}/product/photo/${product._id}`}
+            className={`${styles["card-img"]}`}
+            alt={product.name}
+          />
 
-export default function Card({ showcount = false, count, product, addtocart = true, removefromcart = false, isCartimage = false, removeItemhandler }) {
-    let location = useHistory()
-    return (
-        <div className="card text-white bg-dark border border-info text-center">
-            <div className="card-header lead">{product.name}</div>
-            <div className="card-body">
-                <ImageHelper product={product} cartimage={isCartimage} />
-                <p className="lead bg-success font-weight-normal text-wrap">
-                    {product.description}
+          <div
+            className={`${styles["card-header"]} fw-bold fs-5 lead text-wrap`}
+          >
+            {product.name}
+          </div>
+          <p className="small-text text-wrap mx-1">{product.description}</p>
+          {showcount && (
+            <p className="small-text text-white">Quantity: {count}</p>
+          )}
+          <div className="d-flex justify-content-between px-1 align-items-center">
+            <p className="text-black fw-bold">₹ {product.price}</p>
+            <div className="row">
+              <div className="col-12">
+                <p
+                  className="small-text  mt-2 mb-2"
+                  style={{ color: "#ff5722" }}
+                >
+                  {product.category.name}
                 </p>
-                {showcount && <p className='small-text text-white'>Quantity: {count}</p>}
-                <p className="btn btn-success rounded  btn-sm px-4">{product.price} Rs</p>
-                <div className="row">
-                    <div className="col-12">
-                        {addtocart && <button
-                            onClick={() => {
-                                addItemtoCartandsaveitTolocalStorage(product, () => {
-                                    location.push('/Addtocard')
-                                })
-                            }}
-                            className="btn btn-block btn-outline-success mt-2 mb-2"
-                        >
-                            Add to Cart
-                        </button>}
-
-                    </div>
-                    <div className="col-12">
-                        {removefromcart && <button
-                            onClick={() => { removeItemhandler(product._id) }}
-                            className="btn btn-block btn-outline-danger mt-2 mb-2"
-                        >
-                            Remove from cart
-                        </button>}
-
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
-    )
+      </div>
+    </Link>
+  );
 }
-
-
-

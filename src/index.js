@@ -1,14 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import ProductContext from "./context/ProductContext";
 ReactDOM.render(
-  <>
+  <ProductContext>
     <App />
-  </>,
-  document.getElementById('root')
+  </ProductContext>,
+  document.getElementById("root")
 );
-
-

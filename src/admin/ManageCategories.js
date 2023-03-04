@@ -2,25 +2,25 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import { BsArrowLeft } from "react-icons/bs";
-import { DeleteCategory, getCategories } from "./helper/adminapicall";
+import {
+  DeleteCategory,
+  getCategories,
+  getOrderedCategories,
+} from "./helper/adminapicall";
 import { isSignin } from "../auth/helper";
 import Alert from "../user/Alert";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { MdDeleteOutline } from "react-icons/md";
+import { AiOutlineEdit } from "react-icons/ai";
+import styles from "../css/ManageCategories.module.css";
 
 export default function ManageCategories() {
-  const { id, authtoken } = isSignin();
-  const options = {
-    title: {
-      text: "My chart",
-    },
-    series: [
-      {
-        data: [1, 2, 3],
-      },
-    ],
-  };
+  const authtoken = localStorage.getItem("token");
+  const { id } = isSignin();
+
   const [categories, setcategories] = useState([]);
+  const [categoriesdatapoints, setcategoriesdatapoints] = useState([]);
   const [values, setvalues] = useState({
     error: false,
     success: false,
@@ -29,15 +29,6 @@ export default function ManageCategories() {
   });
   const { success, error, errormsg, deletedcategory } = values;
 
-  const preload = () => {
-    getCategories().then((data) => {
-      if (data.errors || data.errormsg) {
-        console.log(data.errormsg);
-      } else {
-        setcategories(data);
-      }
-    });
-  };
   function deleteHandler(categoryid) {
     DeleteCategory(categoryid, id, authtoken).then((data) => {
       if (data.errormsg) {
@@ -54,7 +45,7 @@ export default function ManageCategories() {
         });
         setcategories((previous) => {
           return previous.filter((category) => {
-            return category._id != categoryid;
+            return category._id !== categoryid;
           });
         });
         console.log("something wrong");
@@ -62,17 +53,70 @@ export default function ManageCategories() {
     });
   }
   useEffect(() => {
+    const preload = () => {
+      getCategories().then((data) => {
+        if (data.errors || data.errormsg) {
+          console.log(data.errormsg);
+        } else {
+          setcategories(data);
+        }
+      });
+      getOrderedCategories(id, authtoken)
+        .then((data) => {
+          let map = {};
+          let categoriestem = data.map((item) => {
+            return item.categories;
+          });
+          categoriestem.forEach((item) => {
+            if (map[item]) {
+              map[item] += 1;
+            } else {
+              map[item] = 1;
+            }
+          });
+          let maindatapoints = [];
+          categories.forEach((category, index) => {
+            if (Object.keys(map).includes(category.name)) {
+              maindatapoints[index] = [category.name, map[category.name]];
+            } else {
+              maindatapoints[index] = [category.name, 0];
+            }
+          });
+          setcategoriesdatapoints(maindatapoints);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     preload();
   }, []);
+  const options = {
+    title: {
+      text: "Categories data",
+    },
+    yAxis: {
+      title: {
+        text: "Categories",
+      },
+    },
 
+    xAxis: {
+      title: "No of orders",
+    },
+    series: [
+      {
+        data: categoriesdatapoints,
+      },
+    ],
+  };
   return (
     <Base
-      className="container p-4 bg-info"
+      className={`container ${styles.paddingcls}`}
       title="Manage categories"
       description="You can Handle the categories operations"
     >
-      <div className="row">
-        <div className="col-md-8  bg-white text-dark p-4">
+      <div className={`${styles.categoriesDashboard}`}>
+        <div className={`bg-white text-dark ${styles.categoriestable}`}>
           <Link
             to="/admin/dashboard"
             className="btn btn-outline-info rounded-2 m-2"
@@ -101,18 +145,18 @@ export default function ManageCategories() {
                   <th scope="row">{index + 1}</th>
                   <td>{category.name}</td>
                   <td>
-                    <div>
+                    <div className={`${styles.categoriesbtn}`}>
                       <button
                         onClick={() => deleteHandler(category._id)}
-                        className="btn btn-danger m-2"
+                        className="btn btn-danger btn-sm"
                       >
-                        Delete
+                        <MdDeleteOutline />
                       </button>
                       <Link
                         to={`/admin/category/updateCategory/${category._id}`}
-                        className="btn btn-primary m-2"
+                        className="btn btn-primary btn-sm"
                       >
-                        Update
+                        <AiOutlineEdit />
                       </Link>
                     </div>
                   </td>
@@ -121,7 +165,7 @@ export default function ManageCategories() {
             </tbody>
           </table>
         </div>
-        <div className="col-md-4">
+        <div className={`${styles.categorieschart}`}>
           <HighchartsReact
             allowChartUpdate={true}
             highcharts={Highcharts}
