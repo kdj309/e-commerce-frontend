@@ -112,10 +112,13 @@ export default function PaymentSuccess() {
   }
   return (
     <Base title="Welcome to PlanetShop">
-      <div className="text-center d-inline">
+      <div
+        className="text-center my-2"
+        style={{ width: "max-content", margin: "auto" }}
+      >
         {values.showalert && (
           <div
-            className={`d-inline alert alert-${
+            className={`alert alert-${
               values.success ? "success" : values.error ? "danger" : "secondary"
             } m-auto`}
             role="alert"
