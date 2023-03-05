@@ -173,6 +173,11 @@ export async function deleteUser(userid, authtoken, useridtodelete) {
   let data = await response.json();
   return data;
 }
+export async function getAllSizeOptions() {
+  let response = await fetch(`${api}/sizes`);
+  let data = await response.json();
+  return data;
+}
 export function getDayname(day) {
   switch (day) {
     case 0:

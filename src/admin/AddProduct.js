@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { getCategories, createaProduct } from "./helper/adminapicall";
+import {
+  getCategories,
+  createaProduct,
+  getAllSizeOptions,
+} from "./helper/adminapicall";
 import { isSignin } from "../auth/helper/index";
 import { useHistory } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
@@ -19,17 +23,18 @@ const AddProduct = () => {
     description: "",
     price: "",
     Availabelstock: "",
-    photo: "",
+    image: "",
     categories: [],
     category: "",
     loading: false,
-    size: "",
+    sizeoptions: [],
     error: false,
     success: false,
     errormsg: "",
     createdProduct: "",
     getaRedirect: false,
     formData: "",
+    sizevaluesarry: [],
   });
 
   const {
@@ -44,6 +49,8 @@ const AddProduct = () => {
     formData,
     success,
     errormsg,
+    sizeoptions,
+    sizevaluesarry,
   } = values;
 
   function redirectToAdminHome() {
@@ -53,24 +60,39 @@ const AddProduct = () => {
       }, 2000);
     }
   }
+  function preloadsizeoptions(categoriesdata) {
+    getAllSizeOptions().then((sizedata) => {
+      if (sizedata.errormsg) {
+        setValues({ ...values, error: true, errormsg: sizedata.errormsg });
+      } else {
+        setValues({
+          ...values,
+          sizeoptions: sizedata,
+          formData: new FormData(),
+          categories: categoriesdata,
+        });
+      }
+    });
+  }
 
   useEffect(() => {
-    const preload = () => {
+    const preload = (callback) => {
       getCategories().then((data) => {
         //console.log(data);
         if (data.errormsg) {
           setValues({ ...values, error: true, errormsg: data.errormsg });
         } else {
-          setValues({ ...values, categories: data, formData: new FormData() });
+          callback(data);
         }
       });
     };
-    preload();
+    preload(preloadsizeoptions);
   }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
+    formData.append("sizevaluesarry", JSON.stringify(sizevaluesarry));
     createaProduct(id, authtoken, formData).then((data) => {
       if (data.errormsg) {
         setValues({ ...values, error: true, errormsg: data.errormsg });
@@ -81,7 +103,7 @@ const AddProduct = () => {
           name: "",
           description: "",
           price: "",
-          photo: "",
+          image: "",
           Availabelstock: "",
           loading: false,
           createdProduct: data.name,
@@ -92,20 +114,28 @@ const AddProduct = () => {
   };
 
   const handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    if (name == "sizevaluesarry") {
+      if (event.target.checked) {
+        sizevaluesarry.push(event.target.value);
+      } else {
+        let indexofitem = sizevaluesarry.indexOf(event.target.value);
+        sizevaluesarry.splice(indexofitem, 1);
+      }
+    }
+    const value = name === "image" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value, sizevaluesarry });
   };
 
   const createProductForm = () => (
     <form>
-      <span>Post photo</span>
+      <span>Post image</span>
       <div className="form-group mb-2">
         <label className={`btn btn-block btn-success ${styles.responsivebtn}`}>
           <input
-            onChange={handleChange("photo")}
+            onChange={handleChange("image")}
             type="file"
-            name="photo"
+            name="image"
             accept="image"
             placeholder="choose a file"
           />
@@ -114,7 +144,7 @@ const AddProduct = () => {
       <div className="form-group mb-2">
         <input
           onChange={handleChange("name")}
-          name="photo"
+          name="image"
           className="form-control"
           placeholder="Name"
           value={name}
@@ -123,7 +153,7 @@ const AddProduct = () => {
       <div className="form-group mb-2">
         <textarea
           onChange={handleChange("description")}
-          name="photo"
+          name="image"
           className="form-control"
           placeholder="Description"
           value={description}
@@ -144,8 +174,8 @@ const AddProduct = () => {
           className="form-control"
           placeholder="Category"
         >
-          <option>Select</option>
-          {categories &&
+          <option>Category</option>
+          {categories.length &&
             categories.map((cate, index) => (
               <option key={index} value={cate._id}>
                 {cate.name}
@@ -154,18 +184,21 @@ const AddProduct = () => {
         </select>
       </div>
       <div className="form-group mb-3">
-        <select
-          onChange={handleChange("size")}
-          name="size"
-          className="form-control"
-          placeholder="Size"
-        >
-          <option>Size</option>
-          <option value="XL">XL</option>
-          <option value="XXL">XXL</option>
-          <option value="L">L</option>
-          <option value="SM">M</option>
-        </select>
+        {sizeoptions.length &&
+          sizeoptions.map((s, index) => (
+            <div key={index} className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                onChange={handleChange("sizevaluesarry")}
+                type="checkbox"
+                id="inlineCheckbox1"
+                value={s._id}
+              />
+              <label className="form-check-label" htmlFor="inlineCheckbox1">
+                {s.name}
+              </label>
+            </div>
+          ))}
       </div>
       <div className="form-group mb-2">
         <input
@@ -174,7 +207,7 @@ const AddProduct = () => {
           className="form-control"
           placeholder="Availabelstock"
           value={Availabelstock}
-        />
+        /> 
       </div>
 
       <button
