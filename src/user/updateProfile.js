@@ -68,7 +68,7 @@ function UpdateProfile() {
       {showalert && <Alert cls={alerttype} msg={alertmsg}></Alert>}
       <form onSubmit={submitHandler}>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
@@ -81,7 +81,7 @@ function UpdateProfile() {
           />
         </div>
         <div className="mb-3">
-          <label for="firstname" className="form-label">
+          <label htmlFor="firstname" className="form-label">
             First Name
           </label>
           <input
@@ -93,7 +93,7 @@ function UpdateProfile() {
           />
         </div>
         <div className="mb-3">
-          <label for="lastname" className="form-label">
+          <label htmlFor="lastname" className="form-label">
             Last Name
           </label>
           <input

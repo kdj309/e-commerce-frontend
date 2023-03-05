@@ -3,7 +3,6 @@ import Base from "../core/Base";
 import { createOrder, getPaymentInfo } from "../core/helper/orderHelper";
 import { isSignin } from "../auth/helper";
 import { useHistory } from "react-router-dom";
-import Alert from "../user/Alert";
 import { v4 as uuidv4 } from "uuid";
 export default function PaymentSuccess() {
   const [values, setvalues] = useState({
@@ -18,7 +17,7 @@ export default function PaymentSuccess() {
       setvalues((previous) => {
         return { ...previous, showalert: false };
       });
-    }, 5000);
+    }, 8000);
   };
   const history = useHistory();
 
@@ -113,14 +112,20 @@ export default function PaymentSuccess() {
   }
   return (
     <Base title="Welcome to PlanetShop">
-      {values.showalert && (
-        <Alert
-          alerttype={
-            values.success ? "success" : values.error ? "danger" : "secondary"
-          }
-          msg={values.msg}
-        ></Alert>
-      )}
+      <div className="text-center d-inline">
+        {values.showalert && (
+          <div
+            className={`d-inline alert alert-${
+              values.success ? "success" : values.error ? "danger" : "secondary"
+            } m-auto`}
+            role="alert"
+          >
+            {values.msg}
+            style={{ width: "max-content", margin: "auto" }}
+          </div>
+        )}
+      </div>
+
       <h2 className="dispaly-3 text-center">
         Payment <p className="badge bg-success">Success</p>
       </h2>

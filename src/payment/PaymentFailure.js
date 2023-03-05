@@ -3,7 +3,6 @@ import Base from "../core/Base";
 import { createOrder, getPaymentInfo } from "../core/helper/orderHelper";
 import { useHistory } from "react-router-dom";
 import { isSignin } from "../auth/helper";
-import Alert from "../user/Alert";
 export default function PaymentFailure() {
   const history = useHistory();
   // createOrder
@@ -100,14 +99,19 @@ export default function PaymentFailure() {
 
   return (
     <Base title="Welcome to PlanetShop">
-      {values.showalert && (
-        <Alert
-          alerttype={
-            values.success ? "success" : values.error ? "danger" : "secondary"
-          }
-          msg={values.msg}
-        ></Alert>
-      )}
+      <div className="text-center d-inline">
+        {values.showalert && (
+          <div
+            className={`d-inline alert alert-${
+              values.success ? "success" : values.error ? "danger" : "secondary"
+            } m-auto`}
+            role="alert"
+            style={{ width: "max-content", margin: "auto" }}
+          >
+            {values.msg}
+          </div>
+        )}
+      </div>
       <h2 className="dispaly-3 text-center">
         Payment <p className="badge bg-danger">Failed</p>
       </h2>
