@@ -21,7 +21,9 @@ export default function Card({ showcount = false, count, product }) {
           >
             {product.name}
           </div>
-          <p className="small-text text-wrap mx-1">{product.description}</p>
+          <p className={`small-text mx-1 ${styles["product-description"]}`}>
+            {product.description}
+          </p>
           {showcount && (
             <p className="small-text text-white">Quantity: {count}</p>
           )}

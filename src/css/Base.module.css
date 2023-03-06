@@ -33,6 +33,7 @@
     justify-content: space-between;
   }
   .titlediv {
+    margin-top: 10px;
     padding: 0.3rem;
     text-align: center;
   }

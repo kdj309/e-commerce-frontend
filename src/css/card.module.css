@@ -27,16 +27,27 @@
 }
 
 /* For Mobile Portrait View */
-@media screen and (max-device-width: 480px) and (orientation: portrait) {
+@media screen and (max-device-width: 480px) {
   .card-img {
-    height: 205px;
-    width: 205px;
+    height: 161px;
+    width: 130px;
     margin-bottom: 1em;
   }
   .card-header {
     padding: 0.1em !important;
     font-weight: bold;
     font-size: 0.7em;
+  }
+  .card-body {
+    width: 150px;
+    height: 280px;
+    padding: 0.7em 0.7em !important;
+  }
+  .product-description {
+    overflow: hidden;
+    white-space: nowrap;
+    /* width: 128px; */
+    text-overflow: ellipsis;
   }
 }
 

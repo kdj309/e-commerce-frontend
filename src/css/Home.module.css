@@ -15,16 +15,11 @@
 /* For Mobile Portrait View */
 @media screen and (max-device-width: 480px) {
   .itemscontainer {
-    display: flex;
-    justify-content: space-between;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    gap: 25px;
-    margin-left: 15px;
-    flex-wrap: nowrap;
-  }
-  .itemscontainer::-webkit-scrollbar {
-    display: none;
+    gap: 7px;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
   }
 }
 
