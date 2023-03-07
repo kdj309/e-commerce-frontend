@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { isSignin, signup } from "../auth/helper";
+import { isSignin, signup } from "./helper";
 import styles from "../css/signup.module.css";
-import img from "./../assets/logo.webp";
+import img from "./../assets/myntracopy.svg";
 import NormalAlert from "../core/helper/NormalAlert";
-
+import showpassword from "../assets/showpassword.svg";
+import hidepassword from "../assets/hidepassword.svg";
 export default function Signup() {
+  const [isshowpassword, setisshowpassword] = useState(false);
+  const [isshowrepeatpassword, setisshowrepeatpassword] = useState(false);
   let location = useHistory();
   document.body.style = "background: #f8f9fa;";
   const [user, setuser] = useState({
@@ -131,30 +134,48 @@ export default function Signup() {
             <label htmlFor="Password1" className="form-label">
               Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="Password1"
-              name="password"
-              value={user.password}
-              onChange={OnChange}
-              required
-              minLength={5}
-            />
+            <div className="d-flex">
+              <input
+                type={isshowpassword ? "text" : "password"}
+                className="form-control"
+                id="Password1"
+                name="password"
+                value={user.password}
+                onChange={OnChange}
+                required
+                minLength={5}
+              />
+              <img
+                className={`${styles.passwordlogo}`}
+                title={isshowpassword ? "Hide Password" : "Show Password"}
+                src={isshowpassword ? hidepassword : showpassword}
+                alt="passwordicon"
+                onClick={() => setisshowpassword((previous) => !previous)}
+              />
+            </div>
           </div>
           <div className="mb-3">
             <label htmlFor="Password2" className="form-label">
               Repeat Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="Password2"
-              name="repeatedpassword"
-              value={user.repeatedpassword}
-              required
-              onChange={OnChange}
-            />
+            <div className="d-flex">
+              <input
+                type={isshowrepeatpassword ? "text" : "password"}
+                className="form-control"
+                id="Password2"
+                name="repeatedpassword"
+                value={user.repeatedpassword}
+                required
+                onChange={OnChange}
+              />
+              <img
+                className={`${styles.passwordlogo}`}
+                title={isshowrepeatpassword ? "Hide Password" : "Show Password"}
+                src={isshowrepeatpassword ? hidepassword : showpassword}
+                alt="passwordicon"
+                onClick={() => setisshowrepeatpassword((previous) => !previous)}
+              />
+            </div>
           </div>
           <button
             type="submit"

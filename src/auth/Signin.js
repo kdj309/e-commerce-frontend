@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { authenticate, isSignin, signin } from "../auth/helper";
-import img from "./../assets/logo.webp";
+import { authenticate, isSignin, signin } from "./helper";
+import img from "./../assets/myntracopy.svg";
 import styles from "../css/signin.module.css";
 import NormalAlert from "../core/helper/NormalAlert";
+import showpassword from "../assets/showpassword.svg";
+import hidepassword from "../assets/hidepassword.svg";
+//
 export default function Signin() {
+  const [isshowpassword, setisshowpassword] = useState(false);
   let location = useHistory();
   const [user, setuser] = useState({
     email: "",
@@ -89,16 +93,25 @@ export default function Signin() {
             <label htmlFor="Password1" className="form-label">
               Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="Password1"
-              name="password"
-              value={user.password}
-              onChange={OnChange}
-              minLength={5}
-              required
-            />
+            <div className="d-flex">
+              <input
+                type={isshowpassword ? "text" : "password"}
+                className="form-control"
+                id="Password1"
+                name="password"
+                value={user.password}
+                onChange={OnChange}
+                minLength={5}
+                required
+              />
+              <img
+                className={`${styles.passwordlogo}`}
+                title={isshowpassword ? "Hide Password" : "Show Password"}
+                src={isshowpassword ? hidepassword : showpassword}
+                alt="passwordicon"
+                onClick={() => setisshowpassword((previous) => !previous)}
+              />
+            </div>
           </div>
           <button
             type="submit"

@@ -6,7 +6,7 @@ import { isSignin, Signout } from "../auth/helper";
 import { BiUserCircle } from "react-icons/bi";
 import { BsHandbag } from "react-icons/bs";
 import { RiAdminLine } from "react-icons/ri";
-import logo from "../assets/logo.webp";
+import logo from "../assets/myntracopy.svg";
 import styles from "../css/nav.module.css";
 import { useProductcontext } from "../context/ProductContext";
 
