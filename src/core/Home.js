@@ -31,16 +31,17 @@ function Home() {
   return (
     <Base title="Welcome to PlanetShop">
       <div className="d-flex flex-row align-items-end justify-content-end">
-        <div className="align-self-end d-flex">
+        <div className={`${styles.selectcontainer}`}>
           <select
             onChange={(e) => {
               sortArray(e.target.value);
             }}
             className="form-select mx-2"
             aria-label="Default select example"
+            placeholder="Sort"
           >
-            <option defaultValue value="default">
-              Sort by
+            <option defaultValue value="default" id="sortby">
+              Sort By
             </option>
             <option value="High">Price: High To Low</option>
             <option value="Low">Price: Low To High</option>
@@ -72,7 +73,7 @@ function Home() {
             aria-label="Default select example"
           >
             <option defaultValue value="default">
-              Filter by{" "}
+              Filter By
             </option>
             <optgroup label="Category">
               {categories.map((item) => {

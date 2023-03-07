@@ -16,7 +16,7 @@ export default function Base({
     <div>
       <Nav />
       {showcarosuel && <Slidercarosuel />}
-      <div className="container-fluid">
+      <div className={`container-fluid ${styles.paddingcontrol}`}>
         <div className={`jumbotron bg-light text-dark ${styles.titlediv}`}>
           <h2 className="display-4">{title}</h2>
           <p className="lead">{description}</p>

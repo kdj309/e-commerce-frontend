@@ -5,6 +5,10 @@
   gap: 1.1rem;
   flex-wrap: wrap;
 }
+.selectcontainer {
+  align-self: flex-end;
+  display: flex;
+}
 @media screen and (min-width: 1024px) {
 }
 
@@ -20,6 +24,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
+  }
+  .selectcontainer {
+    justify-content: space-between;
+    width: 100%;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    z-index: 5;
+    padding: 0.5em;
   }
 }
 
