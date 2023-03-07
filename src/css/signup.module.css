@@ -12,6 +12,16 @@
   position: relative;
   right: 23px;
 }
+.signupbtns {
+  cursor: pointer;
+  background-color: #ff3f6c;
+  text-align: center;
+  padding: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
 @media (min-width: 0px) and (max-width: 426px) {
   .signup-container {
     box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
@@ -21,5 +31,16 @@
   .logo {
     width: 100px;
     height: 100px;
+  }
+  .signupbtns {
+    cursor: pointer;
+    background-color: #ff3f6c;
+    text-align: center;
+    padding: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    width: 100%;
   }
 }

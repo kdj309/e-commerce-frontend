@@ -9,6 +9,7 @@ import { RiAdminLine } from "react-icons/ri";
 import logo from "../assets/myntracopy.svg";
 import styles from "../css/nav.module.css";
 import { useProductcontext } from "../context/ProductContext";
+import { IoIosSearch } from "react-icons/io";
 
 function Nav() {
   const { products, setproductstorender } = useProductcontext();
@@ -159,8 +160,8 @@ function Nav() {
                 aria-label="Search"
                 onChange={(e) => setsearchvalue(e.target.value)}
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
+              <button className="btn" type="submit">
+                <IoIosSearch color="grey" />
               </button>
             </form>
           </div>

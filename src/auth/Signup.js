@@ -177,10 +177,7 @@ export default function Signup() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary btn-lg bg-theme-color rounded-2"
-          >
+          <button type="submit" className={`btn ${styles.signupbtns}`}>
             Submit
           </button>
         </form>

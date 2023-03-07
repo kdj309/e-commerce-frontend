@@ -12,6 +12,24 @@
   position: relative;
   right: 23px;
 }
+.signinbtns {
+  cursor: pointer;
+  background-color: #ff3f6c;
+  text-align: center;
+  padding: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+.form-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-links > p {
+  width: max-content;
+}
 @media (min-width: 0px) and (max-width: 426px) {
   .signin-container {
     box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
@@ -21,5 +39,21 @@
   .logo {
     width: 100px;
     height: 100px;
+  }
+  .signinbtns {
+    cursor: pointer;
+    background-color: #ff3f6c;
+    text-align: center;
+    padding: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    width: 100%;
+  }
+  .form-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 }

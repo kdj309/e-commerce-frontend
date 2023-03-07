@@ -113,16 +113,32 @@ export default function Signin() {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary btn-lg bg-theme-color rounded-2"
-          >
+          <button type="submit" className={`btn ${styles.signinbtns}`}>
             Login
           </button>
         </form>
-        <div>
+        <div className={`${styles["form-links"]}`}>
           <p>
-            Don't have an Account <Link to="/signup">Sign Up</Link>
+            Don't have an Account{" "}
+            <Link
+              className="border-bottom border-primary-subtle"
+              style={{ textDecoration: "none" }}
+              to="/signup"
+            >
+              Sign Up
+            </Link>
+          </p>
+          <p
+            className="border-bottom border-primary-subtle"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setuser({
+                email: "rebanok594@terkoer.com",
+                password: "test@654321",
+              });
+            }}
+          >
+            Login As Test User
           </p>
         </div>
       </div>
