@@ -122,9 +122,9 @@ export default function PaymentSuccess() {
               values.success ? "success" : values.error ? "danger" : "secondary"
             } m-auto`}
             role="alert"
+            style={{ width: "max-content", margin: "auto" }}
           >
             {values.msg}
-            style={{ width: "max-content", margin: "auto" }}
           </div>
         )}
       </div>

@@ -22,7 +22,10 @@ export default function UserOrders() {
           })
         )
       ) : (
-        <div className="d-flex justify-content-center">
+        <div
+          className="d-flex justify-content-center "
+          style={{ width: "max-content", margin: "auto" }}
+        >
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
