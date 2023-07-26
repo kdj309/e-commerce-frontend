@@ -26,8 +26,10 @@ export default function ProductDetail({ productinfo }) {
     obj.count = 1;
     return obj;
   }
+  
+  // ${api}/product/photo/${productinfo._id}
   const imageurl = productinfo._id
-    ? `${api}/product/photo/${productinfo._id}`
+    ? `https://eelicate.sirv.com/Images/product${productinfo._id}.webp?format=webp`
     : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
   return (
     <div className={`container-fluid row ${styles.productdivcontainer}`}>
@@ -35,8 +37,8 @@ export default function ProductDetail({ productinfo }) {
         className={`col-md-8 ${styles.imagewrapper} border border-secondary-subtle py-3`}
       >
         <img
-          src={imageurl}
-          className={`${styles.productimage}`}
+          data-src={imageurl}
+          className={`Sirv ${styles.productimage} productdetail-img`}
           alt="productimage"
         />
       </div>

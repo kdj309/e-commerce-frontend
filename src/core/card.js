@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import api from "../backend/Api";
+// import api from "../backend/Api";
 import styles from "../css/card.module.css";
 
 export default function Card({ showcount = false, count, product }) {
+  const imageurl = product._id
+    ? `https://eelicate.sirv.com/Images/product${product._id}.webp`
+    : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
   return (
     <Link to={`/product/${product._id}`} style={{ textDecoration: "none" }}>
       <div
@@ -11,8 +14,8 @@ export default function Card({ showcount = false, count, product }) {
       >
         <div className={`${styles["card-body"]}`}>
           <img
-            src={`${api}/product/photo/${product._id}`}
-            className={`${styles["card-img"]}`}
+            data-src={imageurl}
+            className={`Sirv ${styles["card-img"]} card-profile-img`}
             alt={product.name}
           />
 

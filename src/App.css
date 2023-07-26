@@ -1,0 +1,3 @@
+card-img.Sirv:not([width]):not([height]) {
+    width: 210px;
+}
