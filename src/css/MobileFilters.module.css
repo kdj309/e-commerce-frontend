@@ -1,0 +1,56 @@
+.SearchFiltersWrapper{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    background-color: white;
+    display: none;
+}
+.SearchFiltersWrapper>div:first-child{
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem;
+}
+.SearchFiltersWrapper>div:last-child{
+    border-top: 1px solid #eaeaec;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 101;
+    background-color: white;
+}
+.SearchFilterscontainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+}
+.filtertypes{
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: scroll;
+    background-color: #f5f5f6;
+    list-style: none;
+    align-self: flex-start;
+    padding: 0;
+    margin: 0;
+}
+.filteroptions{
+    height: 100%;
+    padding-right: 12px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    flex: .7;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+

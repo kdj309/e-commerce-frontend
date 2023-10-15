@@ -13,7 +13,6 @@ export default function Addtocart({
   alertuser,
 }) {
   let location = useHistory();
-
   return (
     <div className={className && className}>
       {addtocart ? (
@@ -25,7 +24,7 @@ export default function Addtocart({
               return;
             }
             addItemtoCartandsaveitTolocalStorage(product, () => {
-              location.push("/Addtocard");
+              location.push("/Addtocart");
             });
           }}
           className={`btn mt-2 mb-2 ${styles.addtocartbtns}`}

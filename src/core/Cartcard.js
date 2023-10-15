@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "../css/cart.module.css";
-import api from "../backend/Api";
 export default function Cartcard({ product, removeItemhandler, increaseQty }) {
   return (
     <div className={styles.cartmaincontainer}>
       <div className="col-md-4 m-2">
         <img
           className={`${styles.cartimg}`}
-          src={`${api}/product/photo/${product._id}`}
+          src={`${process.env.REACT_APP_BASE_URL}/product/photo/${product._id}`}
           alt=""
         />
       </div>

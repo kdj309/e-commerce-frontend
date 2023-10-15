@@ -50,10 +50,7 @@ export default function Cart() {
         >
           {products?.length === 0 ? (
             <h3 className="text-white theme-color text-center">
-              You are really gone miss some cool clothes in your wardrobe{" "}
-              <span className="badge bg-success mr-2">
-                buy some clothes man 😎!
-              </span>
+              You are really gone miss some cool products in your wardrobe{" "}
             </h3>
           ) : (
             products?.map((product) => {

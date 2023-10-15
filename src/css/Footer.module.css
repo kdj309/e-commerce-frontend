@@ -1,0 +1,70 @@
+.footer {
+  background-color: black;
+  color: white;
+}
+.footerContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.footerContainer > div {
+  padding: 0.32em;
+}
+.footerContainer > div a {
+  text-decoration: none;
+  color: #c4c4c4;
+}
+.footerContainer > div a:hover {
+  color: white;
+}
+.footerContainer > div h4 {
+  text-transform: uppercase;
+}
+.footerContainer > div p {
+  font-size: 14px;
+  color: #c4c4c4;
+}
+.footerInput > input {
+  outline: none;
+  border: none;
+  background: none;
+  border-bottom: 1px solid white;
+  color: white;
+  margin-bottom: 0.45em 0.64em;
+}
+.socialMediaWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+  .footerContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footerContainer > div h4 {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .footerContainer > div p {
+    font-size: 13px;
+    color: ghostwhite;
+  }
+  .footerContainer > div a,
+  .footerContainer > div a svg {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+  }
+  .socialMediaWrapper {
+    justify-content: unset;
+    gap: 10px;
+  }
+  .footer{
+    position: 0;
+    position: sticky;
+  }
+  .mobileresponsive {
+    bottom: 57px;
+    position: sticky;
+  }
+}

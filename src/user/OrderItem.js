@@ -23,7 +23,6 @@ export default function OrderItem({ product, setuserdata }) {
   function delteHandler() {
     deleteOrderItem(id, authtoken, product.uid)
       .then((data) => {
-        console.log(data);
         setuserdata(data);
       })
       .catch((err) => console.log(err));

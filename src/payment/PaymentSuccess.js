@@ -51,7 +51,6 @@ export default function PaymentSuccess() {
     let paymentId = localStorage.getItem("paymentId");
     let selectedProducts = JSON.parse(localStorage.getItem("selectedItems"));
     let paymentInfo = JSON.parse(localStorage.getItem("paymentInfo"));
-    console.log(paymentInfo.paymentData.timestamp);
     let orderData = {
       categories: selectedProducts.map((product) => product.category.name),
       products: selectedProducts.map((product) => {

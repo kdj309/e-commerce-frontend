@@ -1,0 +1,8 @@
+.itemscontainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+    align-self: flex-start;
+  }

@@ -48,7 +48,6 @@ export default function Signup() {
             repeatedpassword: "",
           });
           let returnuser = isSignin();
-          console.log(returnuser.role);
           if (returnuser.role) {
             location.push("/admin/dashboard");
           } else {
@@ -63,7 +62,9 @@ export default function Signup() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        seterror(() => {
+          return "please fill the valid details";
+        });
       });
     //console.log(response);
   }

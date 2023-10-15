@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import api from "../backend/Api";
 import styles from "../css/card.module.css";
 
 export default function Card({ showcount = false, count, product }) {
@@ -16,29 +15,29 @@ export default function Card({ showcount = false, count, product }) {
           <img
             data-src={imageurl}
             className={`Sirv ${styles["card-img"]} card-profile-img`}
-            alt={product.name}
+            alt={product?.name}
           />
 
           <div
             className={`${styles["card-header"]} fw-bold fs-5 lead text-wrap`}
           >
-            {product.name}
+            {product?.name}
           </div>
           <p className={`small-text mx-1 ${styles["product-description"]}`}>
-            {product.description}
+            {product?.description}
           </p>
           {showcount && (
             <p className="small-text text-white">Quantity: {count}</p>
           )}
           <div className="d-flex justify-content-between px-1 align-items-center">
-            <p className="text-black fw-bold">₹ {product.price}</p>
+            <p className="text-black fw-bold">₹ {product?.price}</p>
             <div className="row">
               <div className="col-12">
                 <p
                   className="small-text  mt-2 mb-2"
                   style={{ color: "#ff5722" }}
                 >
-                  {product.category.name}
+                  {product?.category?.name}
                 </p>
               </div>
             </div>

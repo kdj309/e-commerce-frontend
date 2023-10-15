@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getproduct } from "../admin/helper/adminapicall";
-import Base from "../core/Base";
 import ProductDetail from "./ProductDetail";
 import Alert from "../core/Alert";
+import Nav from "../core/Nav";
+import Footer from "../core/Footer";
+import ProductDetailShimmerCard from "../core/ProductDetailShimmerCard";
 
 function ProductInfo({ match }) {
   const [datastatus, setdatastatus] = useState({
@@ -27,20 +29,18 @@ function ProductInfo({ match }) {
         setdatastatus({ error: true, loading: false, succes: false });
       });
   }, []);
-
   return (
-    <Base
-      title="Style is the perfection of a point of view"
-      showcarosuel={false}
-    >
+    <>
+      <Nav />
       {datastatus.loading ? (
-        <p className="display-3">Loading...</p>
+        <ProductDetailShimmerCard />
       ) : datastatus.error ? (
         <Alert msg="failed to load the product" cls="danger"></Alert>
       ) : (
         <ProductDetail productinfo={productinfo}></ProductDetail>
       )}
-    </Base>
+      <Footer />
+    </>
   );
 }
 

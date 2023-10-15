@@ -4,14 +4,14 @@ export default function Sizebutton({
   size,
   value,
   onClickHandler,
-  setisClicked,
+  // setisClicked,
 }) {
   return (
     <div className={`border border-dark ${styles.button}`}>
       <input
         onChange={(e) => {
           onClickHandler(e.target.value);
-          setisClicked(true);
+          // setisClicked(true);
         }}
         required
         type="radio"

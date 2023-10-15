@@ -39,23 +39,15 @@ export default function StripePayment({
     setpaymentprocess((previous) => {
       return { ...previous, loading: true };
     });
-    fetch(`${api}/${userid}/paymentprocess`, {
+    api(`/${userid}/paymentprocess`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authtoken}`,
-      },
-      body: JSON.stringify(body),
+      data: body,
     })
       .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response);
-        localStorage.setItem("paymentId", response.payementintentid);
-        localStorage.setItem("transactionId", response.transactionId);
-        window.location.href = response.url;
+        localStorage.setItem("paymentId", response.data.payementintentid);
+        localStorage.setItem("transactionId", response.data.transactionId);
+        // console.log(response.data)
+        window.location.href = response.data.url;
       })
       .catch((err) => {
         setpaymentprocess({

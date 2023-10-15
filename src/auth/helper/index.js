@@ -1,36 +1,35 @@
 import api from "../../backend/Api";
 //signup method
 export async function signup(user) {
-  let response = await fetch(`${api}/signup`, {
+  let response = await api(`/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify(user),
+    data: user,
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //sign in
 export async function signin(user) {
-  let response = await fetch(`${api}/signin`, {
+  let response = await api(`/signin`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify(user),
+    data: user,
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //middleware to save token in user browser
 export function authenticate(data, next) {
-  //this will check weather page is active
+  //this will check whether page is active
   if (typeof window != undefined) {
     //console.log(document.cookie);
     localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshtoken", data.refreshToken);
     localStorage.setItem(
       "signinuser",
       JSON.stringify({
@@ -50,10 +49,9 @@ export async function Signout(next) {
   if (typeof window != undefined) {
     localStorage.removeItem("token");
     localStorage.removeItem("signinuser");
+    localStorage.removeItem("refreshtoken")
     next();
-    let response = await fetch(`${api}/signout`);
-    let data = await response.json();
-    console.log(data);
+    let response = await api(`/signout`);
   }
 }
 //isSign

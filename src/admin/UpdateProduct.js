@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import { BsArrowLeft } from "react-icons/bs";
@@ -137,7 +137,7 @@ export default function UpdateProduct({ match }) {
   }, []);
 
   const Onchange = (e) => {
-    if (e.target.name == "sizevaluesarry") {
+    if (e.target.name === "sizevaluesarry") {
       if (e.target.checked) {
         sizevaluesarry.push(e.target.value);
       } else {

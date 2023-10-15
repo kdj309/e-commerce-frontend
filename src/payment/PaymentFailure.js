@@ -50,7 +50,6 @@ export default function PaymentFailure() {
     let paymentId = localStorage.getItem("paymentId");
     let selectedProducts = JSON.parse(localStorage.getItem("selectedItems"));
     let paymentInfo = JSON.parse(localStorage.getItem("paymentInfo"));
-    console.log(paymentInfo);
     let orderData = {
       categories: selectedProducts.map((product) => product.category.name),
       products: selectedProducts.map((product) => {

@@ -3,180 +3,123 @@ import api from "../../backend/Api";
 //!Category calls
 //* 1.Creating the Category
 export async function Addcategory(userid, token, category) {
-  let response = await fetch(`${api}/category/user/createcategory/${userid}`, {
+  let response = await api(`/category/user/createcategory/${userid}`, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(category),
+    data: category,
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 
 //* 2.Getting all categories
 export async function getCategories() {
-  let response = await fetch(`${api}/categories`);
-  let data = await response.json();
-  return data;
+  let response = await api(`/categories`);
+  return response.data;
 }
 //* 3. Getting a category
 //
 export async function getCategory(categoryid) {
-  let response = await fetch(`${api}/category/${categoryid}`);
-  let data = await response.json();
-  return data;
+  let response = await api(`/category/${categoryid}`);
+  return response.data;
 }
 //* 4. deleting a category
 //
 export async function DeleteCategory(categoryid, userid, token) {
-  let response = await fetch(`${api}/category/${categoryid}/${userid}`, {
+  let response = await api(`/category/${categoryid}/${userid}`, {
     method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //* 5. updating a category
 export async function updatecategory(userid, token, categoryid, newcategory) {
-  let response = await fetch(`${api}/category/${categoryid}/${userid}`, {
+  let response = await api(`/category/${categoryid}/${userid}`, {
     method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(newcategory),
+    data: newcategory,
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //!product calls
 //* 1.Creating the product
-export const createaProduct = (userId, token, product) => {
-  return fetch(`${api}/product/create/${userId}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: product,
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => console.log(err));
+export const createaProduct = async (userId, token, product) => {
+  try {
+    const response = await api(`/product/create/${userId}`, {
+      method: "POST",
+      data: product,
+    });
+    return response;
+  } catch (err) {
+    console.log(err)
+    return err;
+  }
 };
 //* 2.Getting all products
 export async function getAllproducts() {
-  let response = await fetch(`${api}/products/getAllproducts`);
-  let data = await response.json();
-  return data;
+  let response = await api(`/products/getAllproducts`);
+  return response.data;
 }
 //* 3.Getting a single product
 export async function getproduct(productid) {
-  let response = await fetch(`${api}/product/${productid}`);
-  if (!response.ok) {
+  let response = await api(`/product/${productid}`);
+  
+  if (response.status!==200) {
     throw new Error("Something went wrong");
   }
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //* 4.Updating the product
 export async function updateProduct(userid, token, productid, newproduct) {
-  let response = await fetch(
-    `${api}/product/updateProduct/${userid}/${productid}`,
+  let response = await api(
+    `/product/updateProduct/${userid}/${productid}`,
     {
       method: "PUT",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: newproduct,
+      data: newproduct,
     }
   );
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 //* 5.Deleting the product
 export async function deleteProduct(userid, token, productid) {
-  let response = await fetch(
-    `${api}/product/deleteProduct/${userid}/${productid}`,
+  let response = await api(
+    `/product/deleteProduct/${userid}/${productid}`,
     {
       method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
     }
   );
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 export async function getOrders(id, token) {
-  let response = await fetch(`${api}/Orders/${id}`, {
+  let response = await api(`/Orders/${id}`, {
     method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 
 export async function getOrderedCategories(id, token) {
-  let response = await fetch(`${api}/categories/${id}`, {
+  let response = await api(`/categories/${id}`, {
     method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 export async function deleteOrder(userid, orderid, token) {
-  let response = await fetch(`${api}/Orders/${userid}/${orderid}`, {
+  let response = await api(`/Orders/${userid}/${orderid}`, {
     method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 export async function getAllusers(userid, authtoken) {
-  let response = await fetch(`${api}/allusers/${userid}`, {
+  let response = await api(`/allusers/${userid}`, {
     method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${authtoken}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 export async function deleteUser(userid, authtoken, useridtodelete) {
-  let response = await fetch(`${api}/user/${userid}/delete/${useridtodelete}`, {
+  let response = await api(`/user/${userid}/delete/${useridtodelete}`, {
     method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${authtoken}`,
-    },
   });
-  let data = await response.json();
-  return data;
+  return response.data;
 }
 export async function getAllSizeOptions() {
-  let response = await fetch(`${api}/sizes`);
-  let data = await response.json();
-  return data;
+  let response = await api(`/sizes`);
+  return response.data;
 }
 export function getDayname(day) {
   switch (day) {

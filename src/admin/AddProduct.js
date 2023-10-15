@@ -114,7 +114,7 @@ const AddProduct = () => {
   };
 
   const handleChange = (name) => (event) => {
-    if (name == "sizevaluesarry") {
+    if (name === "sizevaluesarry") {
       if (event.target.checked) {
         sizevaluesarry.push(event.target.value);
       } else {

@@ -1,11 +1,14 @@
-.cardcontainer {
+.cardcontainer{
+  border: none !important;
+  background-color:transparent !important;
+}
+.cardcontainer:hover {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px !important;
+  transform: scale(1.02) !important;
   transition-property: all !important;
   transition-duration: 0.3ms !important;
-  transition-timing-function: ease-out !important;
 }
-
 .card-body {
   padding: 0.7em 0.7em !important;
 }
@@ -16,9 +19,18 @@
 }
 .card-img {
   height: 280px !important;
-  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
   margin-bottom: 1em;
 }
+.product-description {
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 212px;
+  min-width: 212px;
+  text-overflow: ellipsis;
+}
+
 @media screen and (min-width: 1024px) {
 }
 
@@ -28,18 +40,21 @@
 
 /* For Mobile Portrait View */
 @media screen and (max-device-width: 480px) {
-  .card-img {
-    height: 161px;
-    width: 130px;
-    margin-bottom: 1em;
-  }
+
   .card-header {
     padding: 0.1em !important;
     font-weight: bold;
     font-size: 0.7em;
+    text-wrap: nowrap !important;
+    display: block;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    white-space: normal;
   }
   .card-body {
-    width: 150px;
+    width: 180px ;
     height: 280px;
     padding: 0.7em 0.7em !important;
   }
@@ -48,6 +63,16 @@
     white-space: nowrap;
     /* width: 128px; */
     text-overflow: ellipsis;
+  }
+  .card-img {
+    height: 160px !important;
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 1em;
+    width: 100% !important;
+  }
+  .cardcontainer{
+    width: 100%;
   }
 }
 
@@ -69,4 +94,25 @@
 
 /* For iPhone 6 and 6 plus Portrait or Landscape View */
 @media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) {
+}
+@media screen  and (max-width:320px){
+  .card-body {
+    width: 160px ;
+    height: 260px;
+    padding: 0.7em 0.7em !important;
+  }
+  .card-header {
+    padding: 0.1em !important;
+    font-weight: bold;
+    font-size: 0.5em !important;
+    display: block;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    white-space: normal;
+  }
+  .product-description{
+    font-size: 0.5em !important;
+  }
 }

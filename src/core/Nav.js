@@ -8,38 +8,44 @@ import { BsHandbag } from "react-icons/bs";
 import { RiAdminLine } from "react-icons/ri";
 import logo from "../assets/myntracopy.svg";
 import styles from "../css/nav.module.css";
-import { useProductcontext } from "../context/ProductContext";
 import { IoIosSearch } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { setfilteredProducts } from "../store/filterslice";
 
 function Nav() {
-  const { products, setproductstorender } = useProductcontext();
+  const filteroptions = useSelector((state) => state.filteroptions);
+  const { productstofilter } = filteroptions;
+
   let history = useHistory();
   let location = useLocation();
+  const dispatcher = useDispatch();
+
+  const searchproducts = () => {
+    const filteredproducts = productstofilter?.filter((product) => {
+      if (ToLowerCase(product.name) === ToLowerCase(searchvalue)) {
+        return true;
+      }
+      if (ToLowerCase(product.category.name) === ToLowerCase(searchvalue)) {
+        return true;
+      }
+      if (ToLowerCase(product.description).includes(ToLowerCase(searchvalue))) {
+        return true;
+      }
+    });
+    if (filteredproducts.length) {
+      return filteredproducts;
+    } else {
+      return productstofilter;
+    }
+  };
+
   function ToLowerCase(str) {
     return str.toLowerCase();
   }
+
   function submitHandler(e) {
     e.preventDefault();
-    setproductstorender(() => {
-      const filteredproducts = products.filter((product) => {
-        if (ToLowerCase(product.name) === ToLowerCase(searchvalue)) {
-          return true;
-        }
-        if (ToLowerCase(product.category.name) === ToLowerCase(searchvalue)) {
-          return true;
-        }
-        if (
-          ToLowerCase(product.description).includes(ToLowerCase(searchvalue))
-        ) {
-          return true;
-        }
-      });
-      if (filteredproducts.length) {
-        return filteredproducts;
-      } else {
-        return products;
-      }
-    });
+    dispatcher(setfilteredProducts(searchproducts()));
   }
   const [searchvalue, setsearchvalue] = useState("");
   return (
@@ -77,16 +83,17 @@ function Nav() {
             </li>
             {isSignin() ? (
               <li className="nav-item">
-                <span
+                <Link
                   onClick={() => {
                     Signout(() => {
                       history.push("/signin");
                     });
                   }}
                   className="nav-link text-warning"
+                  to="/"
                 >
                   LOGOUT
-                </span>
+                </Link>
               </li>
             ) : (
               <>
@@ -143,27 +150,28 @@ function Nav() {
             )}
             <Link
               className={
-                `${location.pathname}` === "/Addtocard"
+                `${location.pathname}` === "/Addtocart"
                   ? "nav-link text-dark active"
                   : "nav-link text-dark"
               }
-              to="/Addtocard"
+              to="/Addtocart"
             >
               <BsHandbag fontSize={22} />
             </Link>
-
-            <form className="d-flex" onSubmit={submitHandler}>
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                onChange={(e) => setsearchvalue(e.target.value)}
-              />
-              <button className="btn" type="submit">
-                <IoIosSearch color="grey" />
-              </button>
-            </form>
+            {location.pathname.includes("/products") && (
+              <form className="d-flex" onSubmit={submitHandler}>
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  onChange={(e) => setsearchvalue(e.target.value)}
+                />
+                <button className="btn" type="submit">
+                  <IoIosSearch color="grey" />
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

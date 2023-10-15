@@ -46,6 +46,9 @@
   .paddingcontrol {
     padding: 0 !important;
   }
+  .footerContainer{
+    flex-direction: column;
+  }
 }
 
 /* For Mobile Landscape View */

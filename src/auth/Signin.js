@@ -23,32 +23,39 @@ export default function Signin() {
       alert("please mention the details");
       return;
     }
-    signin({ email: user.email, password: user.password }).then((data) => {
-      //console.log(data.user);
-      if (data.user) {
-        authenticate(data.user, () => {
-          seterror("");
-          setsuccess(true);
-          setuser({
-            ...user,
-            email: "",
-            password: "",
-            didredirect: true,
+    signin({ email: user.email, password: user.password })
+      .then((data) => {
+        if (data.user) {
+          authenticate(data.user, () => {
+            seterror("");
+            setsuccess(true);
+            setuser({
+              ...user,
+              email: "",
+              password: "",
+              didredirect: true,
+            });
+            let returnuser = isSignin();
+            if (returnuser.role) {
+              location.push("/admin/dashboard");
+            } else {
+              location.push("/user/dashboard");
+            }
           });
-          let returnuser = isSignin();
-          console.log(returnuser.role);
-          if (returnuser.role) {
-            location.push("/admin/dashboard");
-          } else {
-            location.push("/user/dashboard");
-          }
-        });
-      } else {
+        } else {
+          seterror(() => {
+            console.log(data.erros);
+            return data.errors
+              ? "please fill the valid details"
+              : data.errormsg;
+          });
+        }
+      })
+      .catch((err) => {
         seterror(() => {
-          return data.errors ? "please fill the valid details" : data.errormsg;
+          return "Email or password is incorrect";
         });
-      }
-    });
+      });
   }
   function OnChange(e) {
     setuser({ ...user, [e.target.name]: e.target.value });

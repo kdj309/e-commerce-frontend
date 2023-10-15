@@ -1,0 +1,309 @@
+.categorycontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.categorycontainer a {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.65em 0.78em;
+  text-align: center;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  color: #000;
+  text-decoration: none;
+}
+.categorycontainer a > img {
+  width: 250px;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+  transition: all 0.3s;
+  transform: scale(1);
+}
+.categorycontainer a:hover img {
+  transform: scale(1.1);
+}
+.winterbannercontainer {
+  background-color: #faf8f6;
+  margin-top: 80px;
+  padding: 1.3em;
+}
+.winterbanner {
+  display: flex;
+  gap: 25px;
+}
+img[alt="winterone"] {
+  position: relative;
+  top: -50px;
+}
+.winterbanner img {
+  width: 230px;
+  height: 345px;
+  border-radius: 46%;
+  object-fit: contain;
+}
+img[alt="wintertwo"] {
+  border-radius: 60%;
+  width: 260px;
+}
+.winterbannertextdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #2d5363;
+}
+.winterbannertextdiv h2 {
+  margin-bottom: 0;
+}
+.primary_heading {
+  font-weight: bolder;
+  color: #2d5363;
+  padding: 0.3em;
+}
+.hollowtext {
+  -webkit-text-stroke: 1px #2d5363;
+  color: white !important;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+  font-weight: normal !important;
+}
+.winterbanner_ctabtn {
+  background-color: #2d5363;
+  color: white;
+  border-radius: 25px;
+  width: 180px;
+  padding: 0.6em;
+  outline: none;
+  border: none;
+  margin-top: 10px;
+}
+.collectionBannerContainer {
+  margin-top: 80px;
+  padding: 1.3em;
+}
+.collectionBannerHeaderWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 20px;
+}
+.collectionBannerHeader {
+  display: flex;
+  gap: 10px;
+}
+.collectionBannerHeader h3 {
+  color: #2d5363;
+}
+.collectionBannerHeader h3:last-child {
+  -webkit-text-stroke: 1px #2d5363;
+  color: white !important;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.collectionBannerContainer_ctabtn {
+  background-color: #2d5363;
+  color: white;
+  border-radius: 25px;
+  width: 180px;
+  padding: 0.6em;
+  outline: none;
+  border: none;
+  margin-top: 10px;
+}
+.collectionbannerimgContainer {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.collectionbannerimgContainer img {
+  object-position: 0% 0%;
+  width: 345px;
+  height: 370px;
+  object-fit: cover;
+}
+.fashionbannerwrapper {
+  margin-top: 80px;
+  padding: 1.3em;
+  display: flex;
+  justify-content: space-between;
+}
+.fashionbannerheader h3 {
+  color: #2d5363;
+  font-weight: bolder;
+}
+.fashionbannerheader p {
+  width: 80%;
+}
+.fashionbanner_img_container {
+  display: flex;
+  gap: 25px;
+}
+.fashionbanner_img_container img:first-child {
+  height: 280px;
+  opacity: 1;
+}
+.fashionbanner_img_container img:hover {
+  height: 280px;
+  opacity: 1;
+  transform: scale(1.05);
+}
+.fashionbanner_img_container img {
+  object-position: 0% 0%;
+  width: 220px;
+  height: 240px;
+  object-fit: cover;
+  opacity: 0.6;
+  border-radius: 14px;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+@media screen and (min-width: 1024px) {
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) {
+  .categorycontainer {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-gap: 10px;
+  }
+  .categorycontainer a {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .categorycontainer a:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0.65em 0.78em;
+    text-align: center;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+      rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    color: #000;
+    text-decoration: none;
+    grid-column-end: 3;
+    grid-column-start: 1;
+    width: 100%;
+  }
+  .categorycontainer a > img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    display: block;
+    transition: all 0.3s;
+    transform: scale(1);
+  }
+  .winterbanner {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .winterbanner img {
+    height: 215px;
+    width: 145px;
+  }
+  .winterbanner img:last-child {
+    height: 215px;
+    width: 160px;
+  }
+  .collectionbannerimgContainer {
+    overflow-x: scroll;
+  }
+  .winterbannercontainer > div {
+    flex-direction: column;
+  }
+  .collectionBannerContainer {
+    margin-top: 80px;
+    padding: 0.2em;
+  }
+  .primary_heading,
+  .collectionBannerHeader h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .collectionBannerContainer_ctabtn {
+    font-size: 14px;
+    background-color: #2d5363;
+    color: white;
+    border-radius: 25px;
+    width: 90px;
+    padding: 0.4em;
+    outline: none;
+    border: none;
+    margin-top: 0;
+  }
+  .fashionbannerwrapper {
+    flex-direction: column;
+    padding: 0.3em;
+    gap: 15px;
+  }
+  .fashionbanner_img_container {
+    flex-direction: column;
+  }
+  .fashionbanner_img_container img {
+    width: 80%;
+  }
+  .fashionbanner_img_container img:first-child {
+    width: 100%;
+  }
+  .fashionbanner_img_container img:hover {
+    width: 100%;
+  }
+  .hollowtext {
+    -webkit-text-stroke: 1px #2d5363;
+    color: white !important;
+    text-shadow: unset;
+    font-weight: normal !important;
+  }
+  .collectionBannerHeader h3:last-child {
+    -webkit-text-stroke: 1px #2d5363;
+    color: white !important;
+    text-shadow: unset;
+  }
+  .collectionBannerHeader {
+    display: flex;
+    gap: 5px;
+  }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+}
+
+/* For iPhone 4 Portrait or Landscape View */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 5 Portrait or Landscape View */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* For iPhone 6 and 6 plus Portrait or Landscape View */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) {
+}
+@media screen and (max-width: 320px) {
+  .winterbanner img:last-child {
+    height: 140px;
+    width: 104px;
+    border-radius: 51%;
+  }
+}
