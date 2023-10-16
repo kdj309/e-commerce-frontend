@@ -110,31 +110,31 @@ export default function MobileFilters({
             selectedoptions={categories}
             selectedtype="categories"
             onChangeHandler={categoriesChangeHandler}
-            className={activeFilter === "categories" ? "d-block" : "d-none"}
+            className={activeFilter === "categories" ? `d-flex flex-column ${styles.filteroptionsdiv}` : "d-none"}
           />
           <FilterOption
             selectedoptions={brands}
             selectedtype="brands"
             onChangeHandler={brandsChangeHandler}
-            className={activeFilter === "brands" ? "d-block" : "d-none"}
+            className={activeFilter === "brands" ? `d-flex flex-column ${styles.filteroptionsdiv}` : "d-none"}
           />
           <FilterOption
             selectedoptions={price}
             selectedtype="price"
             onChangeHandler={priceChangeHandler}
-            className={activeFilter === "price" ? "d-block" : "d-none"}
+            className={activeFilter === "price" ? `d-flex flex-column ${styles.filteroptionsdiv}` : "d-none"}
           />
           <FilterOption
             selectedoptions={sizes}
             selectedtype="size"
             onChangeHandler={sizeChangeHandler}
-            className={activeFilter === "size" ? "d-block" : "d-none"}
+            className={activeFilter === "size" ? `d-flex flex-column ${styles.filteroptionsdiv}` : "d-none"}
           />
           <FilterOption
             selectedoptions={gender}
             selectedtype="gender"
             onChangeHandler={genderChangeHandler}
-            className={activeFilter === "gender" ? "d-block" : "d-none"}
+            className={activeFilter === "gender" ? `d-flex flex-column ${styles.filteroptionsdiv}` : "d-none"}
           />
         </ul>
       </div>
