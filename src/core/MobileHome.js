@@ -386,7 +386,7 @@ function MobileHome() {
           />
         </div>
       </div>
-      <div className="d-flex">
+      <div className="d-flex mb-3">
         <div className={`${styles.itemscontainer}`}>
           {filteredProducts?.map((product) => {
             return <Card key={product._id} product={product} />;
