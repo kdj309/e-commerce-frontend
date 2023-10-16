@@ -230,16 +230,16 @@ function Home() {
       dispatcher(filterProductsBasedSize({ category }));
     } else {
       if (category !== undefined) {
-        if (genderFilteredproducts.length) {
+        if (selectedGenderFilter.length) {
           appliedfilters = genderFilteredproducts;
         }
-        if (categoryfilterproducts.length) {
+        if (selectedCategoryFilterOptions.length) {
           appliedfilters = categoryfilterproducts;
         }
         if (selectedBrandFilterOptions.length) {
           appliedfilters = brandfilteredproducts;
         }
-        if (pricefilteredproducts.length) {
+        if (selectedPriceFilterOptions.length) {
           appliedfilters = pricefilteredproducts;
         }
         if (appliedfilters.length) {
