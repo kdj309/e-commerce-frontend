@@ -11,7 +11,7 @@ export default function FilterOption({
       {selectedoptions?.map((c, index) => {
         return (
           <div
-            className="mb-3 py-2 form-check border-bottom border-light-subtle"
+            className="mb-3 form-check border-bottom border-light-subtle"
             key={`${index}`}
           >
             {selectedtype === "gender" ? (
@@ -74,7 +74,6 @@ export default function FilterOption({
                 : selectedtype==="gender"
                 ? c
                 : ""}
-              {/* {JSON.stringify(c)} */}
             </label>
           </div>
         );
